@@ -93,7 +93,7 @@ public class DockerVM extends BaseVM implements VMRunner {
                         dockerRun(name, workDir, additionalCommands, scriptRun(script))
                 ))
         );
-        //builder.addFinishProcess(block("Terminating images (if needed)", cmd.commandline(checkoutDir, Arrays.asList("docker", "kill", name, "2>&1", "||", "true"))));
+        builder.addFinishProcess(block("Terminating images (if needed)", cmd.commandline(checkoutDir, Arrays.asList("docker", "rm", name, "2>&1", "||", "true"))));
 
         builder.addFinishProcess(block("Fixing chown", new DelegatingBuildProcess(new DelegatingBuildProcess.ActionAdapter() {
           @NotNull
